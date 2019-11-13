@@ -21,3 +21,5 @@ CAVEAT: the GITLOG should not be public as the metadata recorded can be confiden
 
 Initially, I tried to create a project entry with a .git folder.   These turn out to be banned from being added to git.   Disappointing.
 
+
+Adam Stephen 2019-11-13
