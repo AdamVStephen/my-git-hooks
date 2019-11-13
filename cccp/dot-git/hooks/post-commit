@@ -1,0 +1,10 @@
+#!/bin/sh
+.git/hooks/ctags >/dev/null 2>&1 &
+#echo Running $BASH_SOURCE
+#set | egrep GIT
+#echo PWD is $PWD
+LOGMSG=$(git log --pretty=format:'%h @%ci by <%an> : %s' -1 HEAD)
+REPO=$(git remote -v | grep fetch | awk '{print $2}')
+#echo "user@host | $LOGMSG"
+export GITLOG=${GITLOG:-$HOME/.gitlog}
+printf "%-30s in %s for repo %s\n\t %s" "$(whoami)@$(hostname)" "$PWD" "$REPO" "$LOGMSG" >> ${GITLOG}
