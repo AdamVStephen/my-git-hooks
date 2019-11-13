@@ -3,8 +3,22 @@
 #echo Running $BASH_SOURCE
 #set | egrep GIT
 #echo PWD is $PWD
+TSTAMP=$(date '+%s')
 LOGMSG=$(git log --pretty=format:'%h @%ci by <%an> : %s' -1 HEAD)
 REPO=$(git remote -v | grep fetch | awk '{print $2}')
 #echo "user@host | $LOGMSG"
-export GITLOG=${GITLOG:-$HOME/.gitlog}
-printf "%-30s in %s for repo %s\n\t %s" "$(whoami)@$(hostname)" "$PWD" "$REPO" "$LOGMSG" >> ${GITLOG}
+export GITLOG=${GITLOG:-$HOME/git-wd/my-git-commits/git-commits.json}
+printf "{'when': ${TSTAMP}, 'who' : $(whoami), 'host' : $(hostname), 'pwd' : $PWD, 'repo' : $REPO}\n" >> $GITLOG
+printf "{'when' : ${TSTAMP}, 'what' : $LOGMSG}\n" >> $GITLOG
+if [ -d $HOME/git-wd/my-git-commits/ ]
+then
+		echo "now make a git commit and push in $HOME/git-wd/my-git-commits"
+		cd $HOME/git-wd/my-git-commits
+		git add git-commits.json
+		git commit -m"Work on $REPO at $TSTAMP"
+		git pull
+		git push
+else
+		echo "WARNING : post-commit-gitlog-tracker requires $HOME/git-wd/my-git-commits to be effective."
+fi
+
