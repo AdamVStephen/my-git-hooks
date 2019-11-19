@@ -3,6 +3,8 @@ Git hook scripts that I want to reuse across projects.   Generally very personal
 
 ## Hooks
 
+Note that hooks need to be manually installed when a repo is cloned to a new location.
+
 ### bin/post-commit-gitlog-tracker
 
 Use case is to keep track of all my commits over many machines.  This will generate a two line log entry for a text gitlog file.
