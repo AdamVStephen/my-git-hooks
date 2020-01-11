@@ -15,7 +15,7 @@ then
 		echo "now make a git commit and push in $HOME/git-wd/my-git-commits"
 		cd $HOME/git-wd/my-git-commits
 		git add git-commits.json
-		git commit -m"Work on $REPO at $TSTAMP"
+		git commit -m"Work on $REPO by $USER on $HOSTNAME at $TSTAMP"
 		git pull
 		git push
 else
